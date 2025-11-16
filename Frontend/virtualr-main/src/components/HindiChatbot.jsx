@@ -99,7 +99,7 @@ const HindiChatbot = () => {
       </div>
 
       {/* Chat messages */}
-      <div className="flex-1 overflow-y-auto p-4 flex flex-col justify-end space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 flex flex-col space-y-4">
         {messages.map((msg, i) => (
           <div
             key={i}
