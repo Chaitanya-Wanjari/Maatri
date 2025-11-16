@@ -177,11 +177,11 @@ Body: { "question": "आपका प्रश्न" }
 ### English Chatbot
 ![Chatbot](assets/englishchatbot.png)
 
-### FAQ Page
-![FAQ](assets/faqs.png)
-
 ### Resources
 ![Resources](assets/resources.png)
+
+### FAQ Page
+![FAQ](assets/faqs.png)
 
 
 
