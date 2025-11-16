@@ -1,6 +1,5 @@
 # Maatri – Maternal Health Assistant  
 *A bilingual pregnancy assistant for English and Hindi users.*
-
 ---
 
 ## 🧭 Overview  
