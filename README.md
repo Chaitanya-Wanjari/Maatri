@@ -175,7 +175,7 @@ Body: { "question": "आपका प्रश्न" }
 ![Hindi](assets/screenshots/selectchatbot.png)
 
 ### English Chatbot
-![Chatbot](assets/screenshots/english chatbot.png)
+![Chatbot](assets/screenshots/englishchatbot.png)
 
 ### FAQ Page
 ![FAQ](assets/screenshots/faqs.png)
