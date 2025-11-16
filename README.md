@@ -168,20 +168,20 @@ POST http://localhost:8001/ask
 Body: { "question": "आपका प्रश्न" }
 ```
 ### Home Page
-![Home](assets/screenshots/herosection.png)
+![Home](assets/herosection.png)
 
 
 ### Friendly conversational interface
-![Hindi](assets/screenshots/selectchatbot.png)
+![Hindi](assets/selectchatbot.png)
 
 ### English Chatbot
-![Chatbot](assets/screenshots/englishchatbot.png)
+![Chatbot](assets/englishchatbot.png)
 
 ### FAQ Page
-![FAQ](assets/screenshots/faqs.png)
+![FAQ](assets/faqs.png)
 
 ### Resources
-![Resources](assets/screenshots/resources.png)
+![Resources](assets/resources.png)
 
 
 
