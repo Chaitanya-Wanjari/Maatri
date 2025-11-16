@@ -1,7 +1,6 @@
 # Ignore heavy model files
 english_chatbot/models/
 hindi_chatbot/models/
-hindi_chatbot/embeddings/
 hindi_chatbot/checkpoints/
 
 # Ignore caches
