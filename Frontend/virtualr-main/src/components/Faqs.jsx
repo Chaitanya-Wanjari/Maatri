@@ -90,35 +90,38 @@ const Faqs = () => {
           : "अक्सर पूछे जाने वाले प्रश्न"}
       </h1>
 
-      {/* Language Toggle */}
-      <div className="flex gap-3 mb-6">
-        <button
-          onClick={() => {
-            setLanguage("english");
-            setFilteredFAQs(data.english.slice(0, 5));
-          }}
-          className={`px-4 py-2 rounded-full border ${
-            language === "english"
-              ? "bg-warm-button text-warm-buttonText"
-              : "bg-warm-cardbg text-warm-primary border-warm-border"
-          }`}
-        >
-          English
-        </button>
-        <button
-          onClick={() => {
-            setLanguage("hindi");
-            setFilteredFAQs(data.hindi.slice(0, 5));
-          }}
-          className={`px-4 py-2 rounded-full border ${
-            language === "hindi"
-              ? "bg-warm-button text-warm-buttonText"
-              : "bg-warm-cardbg text-warm-primary border-warm-border"
-          }`}
-        >
-          हिन्दी
-        </button>
-      </div>
+     
+     
+      {/* Language Toggle*/}
+<div className="flex items-center gap-2 bg-warm-cardbg rounded-full p-1 mb-6 border border-warm-border transition-all duration-300 ease-in-out">
+  <button
+    className={`${language === 'english'
+        ? 'bg-warm-button text-warm-buttonText shadow px-4 py-2 rounded-full'
+        : 'px-4 py-2 text-warm-primary'
+      } transition-all duration-300 ease-in-out`}
+    onClick={() => {
+      setLanguage('english');
+      setFilteredFAQs(data.english.slice(0, 5));
+    }}
+  >
+    English
+  </button>
+
+  <button
+    className={`${language === 'hindi'
+        ? 'bg-warm-button text-warm-buttonText shadow px-4 py-2 rounded-full'
+        : 'px-4 py-2 text-warm-primary'
+      } transition-all duration-300 ease-in-out`}
+    onClick={() => {
+      setLanguage('hindi');
+      setFilteredFAQs(data.hindi.slice(0, 5));
+    }}
+  >
+    हिन्दी
+  </button> 
+</div> 
+
+
 
       {/* Search Bar */}
       <div className="w-full max-w-xl mb-6 relative flex" ref={searchRef}>
