@@ -1,172 +1,264 @@
-# Maatri – Maternal Health Assistant  
-*A bilingual pregnancy assistant for English and Hindi users.*
----
+# Maatri – Bilingual Maternal Health Assistant
 
-## 🧭 Overview  
-**Maatri** is a bilingual (English + Hindi) maternal health assistant that helps expecting mothers by providing reliable, empathetic, and context-aware answers using a Retrieval-Augmented Generation (RAG) system.
-
-The system includes:
-- 🔍 **Hybrid Retrieval System** using Sentence Transformers + FAISS  
-- 🧠 **Reranking using Cross-Encoder**  
-- ✨ **Generation and Abstractive Summarization** for natural conversational answers  
-- 🌐 **React Frontend** with modern UI  
-- ⚡ **FastAPI Backend** for both English & Hindi chatbots  
-- 📚 **Extensive curated FAQs** in English & Hindi  
+A bilingual maternal healthcare assistant that provides reliable pregnancy-related guidance in English and Hindi through a hybrid retrieval pipeline combining dense semantic search, reranking, and transformer-based response generation.
 
 ---
 
-## 🚀 Features  
+## Overview
 
-### 🤖 Chatbot (English + Hindi)
-- Friendly conversational interface  
-- Accurate, evidence-based answers  
-- Sources shown on demand  
-- Loading animations + smooth UI  
+Maatri is a web-based maternal health assistant designed to answer pregnancy-related questions in both English and Hindi. Unlike conventional chatbots that depend solely on Large Language Models (LLMs), Maatri retrieves information from a curated medical knowledge base before generating a response. This retrieval-first architecture reduces hallucinations and produces responses grounded in trusted medical sources.
 
-### 📚 FAQ Module  
-- Toggle between English and Hindi  
-- Live search suggestions  
-- Easy-to-read collapsible cards  
-
-### 🎨 Frontend  
-- Built using **React + Tailwind CSS**  
-- Fully responsive  
-- Warm theme aesthetic  
-- Includes Hero section, Features section, Resources page and more  
-
-### ⚙️ Backend  
-- **FastAPI** for high-performance async API  
-- **Multi-Model Integration**:  
-  - Bi-encoder (SentenceTransformer)  
-  - Cross-encoder for ranking  
-  - LLM for final natural language responses  
-- **FAISS vector search**  
-- **Caching for faster response time**
+The system integrates modern NLP techniques including dense vector retrieval, neural reranking, and transformer-based generation to deliver natural, context-aware, and medically reliable answers.
 
 ---
 
-## 📁 Project Structure  
+# Key Features
+
+## Hybrid Retrieval Pipeline
+
+- Dense semantic retrieval using multilingual Sentence Transformers.
+- FAISS vector database for efficient similarity search.
+- Fine-tuned Cross-Encoder for neural reranking.
+- Transformer-based response generation from retrieved evidence.
+
+## Bilingual Chatbot
+
+- English and Hindi conversational interfaces.
+- Context-aware pregnancy guidance.
+- Medical disclaimer with every response.
+- Source passages available on demand.
+
+## FAQ Module
+
+- Curated FAQs for both languages.
+- Live search suggestions.
+- Language toggle.
+- Collapsible question cards.
+
+## Responsive Web Application
+
+- React-based frontend.
+- FastAPI backend.
+- Tailwind CSS UI.
+- Smooth conversational experience.
+
+---
+
+# Retrieval Pipeline
+
+The chatbot follows a four-stage retrieval pipeline.
+
+## Step 1 — Dense Retrieval
+
+The user query is encoded into a dense embedding using the multilingual **E5 Sentence Transformer**.
+
+All document chunks are also stored as dense embeddings.
+
+The query embedding is searched against the FAISS vector index using cosine similarity (implemented through normalized Inner Product search).
+
+The top **25** semantically similar passages are retrieved.
+
+---
+
+## Step 2 — Reranking
+
+The retrieved passages are passed to a **fine-tuned Cross-Encoder**.
+
+Unlike the Bi-Encoder, which encodes queries and documents independently, the Cross-Encoder jointly processes each query-document pair and predicts a relevance score.
+
+The passages are sorted according to these scores.
+
+The highest-ranked **five passages** are selected for generation.
+
+---
+
+## Step 3 — Response Generation
+
+Rather than returning fragmented retrieved passages directly to the user, the selected context is passed to a **fine-tuned transformer generation model**.
+
+The generation model:
+
+- Combines information across multiple passages.
+- Removes redundancy.
+- Produces coherent and conversational responses.
+- Preserves factual information from the retrieved evidence.
+
+This allows the chatbot to provide natural answers while remaining grounded in trusted medical content.
+
+---
+
+## Step 4 — Response Delivery
+
+The generated answer, along with supporting source passages and a medical disclaimer, is returned through the FastAPI backend to the React frontend.
+
+---
+
+# Models Used
+
+| Component | Model |
+|------------|-------|
+| Dense Retrieval | multilingual-e5-base |
+| Vector Search | FAISS (IndexFlatIP) |
+| Neural Reranking | Fine-tuned mMiniLMv2 Cross-Encoder |
+| Response Generation | Fine-tuned Hindi BART |
+| Backend Framework | FastAPI |
+| Frontend Framework | React |
+
+---
+
+# Technology Stack
+
+## Frontend
+
+- React
+- Tailwind CSS
+- React Router
+- Framer Motion
+- Vite
+
+## Backend
+
+- FastAPI
+- Python
+
+## Machine Learning
+
+- Sentence Transformers
+- Transformers
+- FAISS
+- PyTorch
+
+---
+
+# Project Structure
+
+```
 Maatri/
-  Frontend/
-    virtualr-main/
-      src/
-        components/
-          EnglishChatbot.jsx
-          HindiChatbot.jsx
-          Faqs.jsx
-          Navbar.jsx
-          HeroSection.jsx
-          Resources.jsx
-          FeatureSection.jsx
-          Workflow.jsx
-          Pricing.jsx
-          Testimonials.jsx
-          Footer.jsx
-        assets/
-        index.css
-        main.jsx
-      public/
-        data/
-          faqs_english.json
-          faqs_hindi.json
-      package.json
-      vite.config.js
 
-  english_chatbot/
-    app.py
-    requirements.txt
-    models/
-      fine_tuned_cross_encoder/
-      english_embeddings/
-      faiss_indexes/
-      LLM/
-
-  hindi_chatbot/
-    backend/
-      app.py
-      rag.py
-      crossencoder.py
-      models_io.py
-      config.py
-    embeddings/
-      merged_corpus_embeddings.npy
-      merged_corpus_faiss.index
-      merged_corpus_meta.json
-
-  README.md
-
+├── Frontend/
+│   └── virtualr-main/
+│       ├── src/
+│       │   ├── components/
+│       │   ├── assets/
+│       │   ├── App.jsx
+│       │   ├── main.jsx
+│       │   └── index.css
+│       ├── public/
+│       ├── package.json
+│       └── vite.config.js
+│
+├── english_chatbot/
+│   ├── app.py
+│   ├── models/
+│   ├── embeddings/
+│   ├── faiss_indexes/
+│   └── requirements.txt
+│
+├── hindi_chatbot/
+│   ├── backend/
+│   │   ├── app.py
+│   │   ├── rag.py
+│   │   ├── crossencoder.py
+│   │   ├── config.py
+│   │   └── models_io.py
+│   ├── embeddings/
+│   └── models/
+│
+└── README.md
+```
 
 ---
 
-## 🌟 Features
+# Running the Project
 
-### 🗣️ **1. Conversational AI (Hindi + English Chatbots)**
-- Retrieval-augmented generation (RAG)
-- Handles pregnancy health, nutrition, symptoms, risks, lifestyle, etc.
-- Generates empathetic and medically-safe replies with disclaimers
+## Clone Repository
 
-### 🔍 **2. Hybrid Retrieval Pipeline**
-- SentenceTransformer bi-encoder → FAISS vector search  
-- Cross-encoder reranking  
-- Top-K contextual passages passed to generator model  
-- Supports English & Hindi separately  
-
-### 📝 **3. FAQ System (English & Hindi)**
-- Browse curated questions  
-- Live search suggestions  
-- Language toggle  
-- Clean UI using Tailwind CSS  
-
-### ⚡ **4. Modern Frontend (React + Tailwind)**
-- Fully responsive  
-- Smooth animation and UI transitions  
-- Components neatly organized  
-
-### 🚀 **5. FastAPI Backend**
-- Async endpoints  
-- Efficient model loading  
-- Works with both CPU and GPU setups  
-- CORS-enabled for frontend communication  
-
----
-
-## 🛠️ Installation & Setup
-
-###  1. Clone Repository
 ```bash
 git clone https://github.com/Chaitanya-Wanjari/Maatri.git
+
 cd Maatri
 ```
-### 2. Setup Frontend
+
+---
+
+## Frontend
+
 ```bash
 cd Frontend/virtualr-main
+
 npm install
+
 npm run dev
 ```
- App will run at: http://localhost:5173
-### 3. Setup English Chatbot API
+
+Frontend runs at
+
+```
+http://localhost:5173
+```
+
+---
+
+## English Backend
+
 ```bash
 cd english_chatbot
+
 pip install -r requirements.txt
+
 uvicorn app:app --reload --port 8000
 ```
-### 4. Setup Hindi Chatbot API
+
+---
+
+## Hindi Backend
+
 ```bash
 cd hindi_chatbot/backend
+
 pip install -r requirements.txt
+
 uvicorn app:app --reload --port 8001
 ```
-### 5. API Endpoints 
-English Chatbot
-```bash
-POST http://localhost:8000/ask
-Body: { "question": "Your question" }
+
+---
+
+# API Endpoints
+
+## English
+
 ```
-Hindi Chatbot
-```bash
-POST http://localhost:8001/ask
-Body: { "question": "आपका प्रश्न" }
+POST /ask
 ```
+
+Example Request
+
+```json
+{
+    "question": "Can I eat papaya during pregnancy?"
+}
+```
+
+---
+
+## Hindi
+
+```
+POST /ask
+```
+
+Example Request
+
+```json
+{
+    "question":"क्या गर्भावस्था में पपीता खाना सुरक्षित है?"
+}
+```
+
+---
+
+# Screenshots
+
 ### Home Page
 ![Home](assets/herosection.png)
 
@@ -183,5 +275,4 @@ Body: { "question": "आपका प्रश्न" }
 ### FAQ Page
 ![FAQ](assets/faqs.png)
 
-
-
+If you found this project useful or interesting, consider giving the repository a ⭐.
